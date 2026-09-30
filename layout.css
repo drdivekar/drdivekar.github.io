@@ -1,0 +1,630 @@
+/* ==========================================================================
+   Master Layout Stylesheet
+   Header / Navigation / Footer for the responsive site shell.
+   Built on top of baseline.css — uses its font & color custom properties,
+   adds only structural/layout rules (flexbox, spacing, breakpoints).
+   Nav collapses to a hamburger menu below 768px.
+   ========================================================================== */
+
+:root {
+  --layout-max-width: 1100px;
+  --layout-gutter: 24px;
+  --header-bg: var(--color-white);
+  --nav-bg: var(--color-brand-pink-darker);
+  --nav-link-color: var(--color-white);
+  --nav-link-hover: var(--color-brand-pink);
+  --footer-bg: #2f2f31;
+  --footer-text: #cfd3d4;
+  --breakpoint-mobile: 768px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Never let images stretch past their container, on any screen size */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.content-image {
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+/* Dr. Divekar's photo on the Home page: capped size, centered in its column */
+.doctor-photo {
+  max-width: 250px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Wellness page treatment photos: uniform size regardless of the
+   source JPG's actual dimensions — the full image is always shown
+   (no cropping), letterboxed on a neutral background if needed. */
+.treatment-photo {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  background: #f7f2f4;
+}
+
+/* --------------------------------------------------------------------
+   Home page advertisement carousel
+   Auto-rotates through every image in the /advertisement folder every
+   5 seconds (see the script at the bottom of index.html). Drop more
+   <img> slides + matching dots in the markup to add more ads.
+   -------------------------------------------------------------------- */
+.ad-carousel {
+  position: relative;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.ad-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.ad-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  margin: 0;
+  border-radius: 0;
+}
+
+.ad-slide.active {
+  opacity: 1;
+}
+
+.ad-carousel-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ad-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+}
+
+.ad-dot.active {
+  background: var(--color-white);
+}
+
+.ad-dot:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+/* Prev/next arrow buttons */
+.ad-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--color-white);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.ad-arrow:hover,
+.ad-arrow:focus-visible {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.ad-arrow-prev {
+  left: 12px;
+}
+
+.ad-arrow-next {
+  right: 12px;
+}
+
+@media (max-width: 767px) {
+  .ad-carousel-track {
+    height: 200px;
+  }
+
+  .ad-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+}
+
+/* Respect reduced-motion preferences by making the crossfade instant
+   rather than disabling rotation — the content change is the point. */
+@media (prefers-reduced-motion: reduce) {
+  .ad-slide {
+    transition: none;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-gutter);
+}
+
+/* --------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------- */
+/* Header + nav stick together as one unit so a native browser
+   scroll-to-#anchor jump can never separate them. */
+.site-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.site-header {
+  background: var(--header-bg);
+  border-bottom: 1px solid #eee;
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--color-text-darker);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.site-tagline {
+  font-family: var(--font-phone);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  flex: 1 1 auto;
+}
+
+/* Hamburger toggle button — hidden on desktop */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-text-darker);
+  outline-offset: 2px;
+}
+
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--color-text-darker);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hamburger-icon {
+  position: relative;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.hamburger-icon::before {
+  top: -8px;
+}
+
+.hamburger-icon::after {
+  top: 8px;
+}
+
+/* Animate to an "X" when nav is open */
+.nav-toggle[aria-expanded="true"] .hamburger-icon {
+  background: transparent;
+}
+.nav-toggle[aria-expanded="true"] .hamburger-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .hamburger-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------- */
+.site-nav {
+  background: var(--nav-bg);
+}
+
+.site-nav .wrap {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.site-nav li {
+  margin: 0;
+}
+
+.site-nav a {
+  display: block;
+  padding: 16px 18px;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--nav-link-color);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav a:link,
+.site-nav a:visited {
+  color: var(--nav-link-color);
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav li.current a {
+  color: var(--nav-link-hover);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.site-nav a:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: -2px;
+}
+
+/* --------------------------------------------------------------------
+   Main content
+   -------------------------------------------------------------------- */
+main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+main .wrap {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* --------------------------------------------------------------------
+   Single-page "app" sections — header/nav/footer stay on screen at all
+   times; only the section matching the current #hash is shown. JS in
+   the page body toggles the .active class when a nav link is clicked.
+   -------------------------------------------------------------------- */
+.page-section {
+  display: none;
+}
+
+.page-section.active {
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--color-accent-magenta);
+  text-align: center;
+  margin: 0 0 28px 0;
+}
+
+/* --------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------- */
+.site-footer {
+  flex-shrink: 0;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.site-footer .wrap {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.site-footer .practice-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--color-white);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.site-footer a {
+  color: var(--color-brand-pink);
+  text-decoration: underline;
+}
+
+.site-footer a:hover {
+  color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------
+   Mobile: collapse nav behind hamburger below 768px
+   -------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .site-tagline {
+    display: none;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .site-nav.is-open {
+    display: block;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+  }
+
+  .site-nav a {
+    padding: 14px var(--layout-gutter);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .hamburger-icon,
+  .hamburger-icon::before,
+  .hamburger-icon::after {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Shared page-content components
+   Used across index / contact / insurance / services pages.
+   ========================================================================== */
+
+/* Section title */
+main h2 {
+  margin-top: 0;
+}
+
+main section + section {
+  margin-top: 40px;
+}
+
+/* Two-column layout that stacks on mobile */
+.content-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.content-grid > div {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+/* Lists inside content */
+main ul {
+  padding-left: 1.2em;
+  line-height: 1.7;
+}
+
+main ul li {
+  margin-bottom: 4px;
+}
+
+/* Buttons (replaces legacy .wsite-button-inner) */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-brand-pink-dark);
+  color: var(--color-white);
+  font-family: var(--font-button);
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+/* Pin the text color across every interactive state so nothing —
+   default link/visited colors, a browser's own focus styling, etc. —
+   can quietly swap it out and make the label blend into the background. */
+.btn:link,
+.btn:visited,
+.btn:hover,
+.btn:focus,
+.btn:active {
+  color: var(--color-white);
+}
+
+.btn:hover {
+  background: var(--color-brand-pink-darker);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-text-darker);
+  outline-offset: 2px;
+}
+
+/* Insurance page carrier buttons (Cigna, Medicare, United Health Care,
+   Health America, Aetna) — no focus highlight on these specifically */
+.btn-no-focus-outline:focus-visible {
+  outline: none;
+}
+
+/* --------------------------------------------------------------------
+   Windows High Contrast Mode (forced-colors)
+   By default this mode strips ALL custom background + text colors and
+   replaces them with a handful of system colors — that's the most
+   common real-world cause of "button/nav text disappears," because a
+   background can get reset to white while its text independently gets
+   reset to a color that also renders as white-on-white (or similar).
+   Every element below has its background and text color opted out of
+   that override TOGETHER, as a pair, so they can never mismatch.
+   -------------------------------------------------------------------- */
+@media (forced-colors: active) {
+  .site-topbar,
+  .site-nav,
+  .site-nav a,
+  .nav-toggle,
+  .btn,
+  .ad-arrow,
+  .ad-dot,
+  .site-footer,
+  .callout {
+    forced-color-adjust: none;
+  }
+}
+
+.btn-row {
+  margin: 20px 0;
+}
+
+/* Callout / notice box (e.g. COVID notice, "Call us today") */
+.callout {
+  background: #fdf1f5;
+  border-left: 4px solid var(--color-brand-pink);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+}
+
+/* Image placeholder — swap the surrounding <div> for a real <img> later */
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+  color: #999;
+  font-family: var(--font-phone);
+  font-size: 14px;
+  text-align: center;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Responsive embedded map / iframe */
+.embed-responsive {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 */
+  margin-bottom: 16px;
+}
+
+.embed-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Divider */
+main hr {
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin: 24px 0;
+}
+
+/* Document download link (PDF forms) */
+.doc-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+}
+
+.doc-link .doc-title {
+  font-weight: bold;
+  display: block;
+}
+
+.doc-link a {
+  color: var(--color-brand-pink-dark);
+}

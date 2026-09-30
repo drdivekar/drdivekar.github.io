@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Clean Baseline Stylesheet
+   Extracted core typography & brand styling from the legacy Weebly theme.
+   All .wsite-mobile, .wsite-menu-button, and device-pixel-ratio (retina)
+   media query rules have been removed — those live only in the old
+   mobile-sites.css / parent_style.css framework files and were pure
+   layout/responsive cruft with no theme-specific styling in them.
+   ========================================================================== */
+
+:root {
+  /* Fonts */
+  --font-body: 'Playfair Display', serif;         /* body copy, paragraphs, forms */
+  --font-heading: 'Playfair Display', serif;      /* h2, nav — simple, no cursive/script */
+  --font-display: 'Playfair Display', serif;      /* site title, big headlines */
+  --font-nav-alt: 'Freebooter', sans-serif;       /* top nav menu */
+  --font-phone: 'Quicksand', sans-serif;          /* phone number callout */
+  --font-button: 'Mate SC', sans-serif;           /* button labels */
+
+  /* Brand colors
+     Note: #ff2a7a doesn't appear anywhere in the source files. The theme's
+     actual pink/magenta palette is below — swap these variables if you
+     have a newer brand hex to drop in. */
+  --color-brand-pink: #d55585;
+  --color-brand-pink-dark: #cd4d7d;
+  --color-brand-pink-darker: #792c49;
+  --color-accent-magenta: #d22173;
+
+  --color-text-body: #1a1a1a;
+  --color-text-muted: #333333;
+  --color-text-dark: #1a1a1a;
+  --color-text-darker: #1a1a1a;
+  --color-white: #ffffff;
+}
+
+/* Base */
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--color-text-body);
+}
+
+a {
+  color: var(--color-brand-pink-dark);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-brand-pink-darker);
+}
+
+p,
+div.paragraph {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  padding: 0.5em 0;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  color: var(--color-text-muted);
+  padding: 0.5em 0 0.2em 0;
+}
+
+blockquote {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 30px;
+  border-left: none !important;
+}
+
+/* Site title & headline overrides */
+#wsite-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 61px;
+}
+
+.wsite-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-text-darker);
+  line-height: 33px;
+}
+
+.wsite-headline-paragraph {
+  font-size: 24px;
+  color: var(--color-text-dark);
+  line-height: 39px;
+}
+
+.wsite-image div,
+.wsite-caption {
+  font-family: var(--font-display);
+}
+
+.wsite-phone {
+  font-family: var(--font-phone);
+  font-size: 23px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+}
+
+/* Main content copy */
+#wsite-content div.paragraph,
+#wsite-content p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 37px;
+  color: var(--color-text-dark);
+}
+
+#wsite-content h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 51px;
+  color: var(--color-accent-magenta);
+}
+
+/* Navigation */
+#nav-wrap .container,
+#nav-wrap .container ul li a,
+#wsite-menus .wsite-menu li a {
+  font-family: var(--font-heading);
+}
+
+#nav-wrap .container ul li a {
+  color: var(--color-white);
+}
+
+#wsite-menus .wsite-menu li a {
+  font-size: 24px;
+  color: var(--color-text-body);
+}
+#wsite-menus .wsite-menu li a:hover {
+  color: var(--color-brand-pink-dark);
+}
+
+.wsite-menu-default a {
+  font-family: var(--font-nav-alt);
+  font-size: 30px;
+}
+
+/* Buttons */
+.wsite-button-inner {
+  font-family: var(--font-button);
+  color: var(--color-white) !important;
+}
+.wsite-button-small .wsite-button-inner {
+  font-size: 20px;
+}
+.wsite-button-large .wsite-button-inner {
+  font-size: 15px;
+}
+
+/* Forms */
+.wsite-form-label {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--color-text-body);
+}
+
+.wsite-form-input,
+.wsite-search-element-input,
+.form-select,
+.form-radio-container {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--color-text-muted);
+}
+
+.wsite-form-sublabel {
+  font-size: 14px;
+}

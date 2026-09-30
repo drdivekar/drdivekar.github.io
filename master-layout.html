@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Divekar &amp; Associates</title>
+
+<!-- Brand fonts used by baseline.css -->
+<link href="https://fonts.googleapis.com/css?family=Delius+Swash+Caps&subset=latin,latin-ext" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700&subset=latin,latin-ext" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic&subset=latin,latin-ext" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Quicksand:400,300,700&subset=latin,latin-ext" rel="stylesheet" />
+
+<!-- Site styles -->
+<link rel="stylesheet" href="baseline.css" />
+<link rel="stylesheet" href="layout.css" />
+</head>
+<body>
+
+<!-- ==========================================================
+     HEADER — shared across every page
+     ========================================================== -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-title">Divekar &amp; Associates</a>
+    <span class="site-tagline">Gynecology, Aesthetics, and Wellness Center&nbsp;&ndash;&nbsp;PC</span>
+    <button
+      type="button"
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+    >
+      <span class="hamburger-icon"></span>
+    </button>
+  </div>
+</header>
+
+<!-- ==========================================================
+     NAVIGATION — shared across every page
+     Add class="current" to the <li> matching the active page.
+     ========================================================== -->
+<nav class="site-nav" id="primary-nav" aria-label="Primary">
+  <div class="wrap">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="contact-us.html">Contact Us</a></li>
+      <li><a href="services--gynecology.html">Services (Gynecology)</a></li>
+      <li><a href="services--wellness--aesthetics.html">Services (Wellness &amp; Aesthetics)</a></li>
+      <li><a href="services--virtual-consultation.html">Services (Virtual Consultation)</a></li>
+      <li><a href="http://drdivekar.ehealthpro.com" target="_blank" rel="noopener">Design For Health (Estore)</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==========================================================
+     MAIN — unique per-page content goes here
+     ========================================================== -->
+<main>
+  <div class="wrap">
+    <h2>Page Title</h2>
+    <p>Replace this block with the page's own content.</p>
+  </div>
+</main>
+
+<!-- ==========================================================
+     FOOTER — shared across every page
+     ========================================================== -->
+<footer class="site-footer">
+  <div class="wrap" itemscope itemtype="http://schema.org/Physician">
+    <span class="practice-name" itemprop="name">Divekar &amp; Associates &ndash; Gynecology, Aesthetics and Wellness Center</span>
+    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+      <span itemprop="streetAddress">9102 Babcock Blvd, Suite 107</span>,
+      <span itemprop="addressLocality">Pittsburgh</span>,
+      <span itemprop="addressRegion">PA</span>
+      <span itemprop="postalCode">15237</span>
+    </div>
+    <div>Phone: <span itemprop="telephone">(412) 499-3540</span></div>
+    <div><a href="https://goo.gl/maps/dh2Zr" itemprop="maps">Get directions</a></div>
+  </div>
+</footer>
+
+<script>
+  // Mobile hamburger menu toggle
+  (function () {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.getElementById('primary-nav');
+
+    toggle.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close the mobile menu automatically if the viewport grows past
+    // the mobile breakpoint (e.g. rotating a tablet, resizing a window).
+    var mobileQuery = window.matchMedia('(min-width: 768px)');
+    mobileQuery.addEventListener('change', function (e) {
+      if (e.matches) {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
