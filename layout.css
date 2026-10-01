@@ -221,9 +221,9 @@ body {
 
 .site-title {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 40px;
-  color: var(--color-text-darker);
+  color: var(--color-accent-magenta)
   text-decoration: none;
   line-height: 1;
 }
