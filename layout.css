@@ -329,6 +329,7 @@ body {
   color: var(--nav-link-color);
   text-decoration: none;
   white-space: nowrap;
+  border-radius: 999px;
 }
 
 .site-nav a:link,
@@ -526,7 +527,7 @@ main ul li {
   font-family: var(--font-button);
   font-size: 15px;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 999 px;
   transition: background 0.15s ease;
 }
 
@@ -649,6 +650,15 @@ main hr {
   display: block;
 }
 
+/* Turn the "Download File" links in the forms section into rounded buttons */
 .doc-link a {
-  color: var(--color-brand-pink-dark);
+  display: inline-block;
+  padding: 6px 16px;
+  border: 2px solid var(--color-brand-pink-dark);
+  border-radius: 999px;
+  text-decoration: none;
+}
+.doc-link a:hover {
+  background: var(--color-brand-pink-dark);
+  color: var(--color-white);
 }
