@@ -223,7 +223,7 @@ body {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 40px;
-  color: var(--color-accent-magenta)
+  color: var(--color-accent-magenta);
   text-decoration: none;
   line-height: 1;
 }
