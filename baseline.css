@@ -9,9 +9,9 @@
 
 :root {
   /* Fonts */
-  --font-body: 'Playfair Display', serif;         /* body copy, paragraphs, forms */
-  --font-heading: 'Playfair Display', serif;      /* h2, nav — simple, no cursive/script */
-  --font-display: 'Playfair Display', serif;      /* site title, big headlines */
+  --font-body: 'Tinos', 'Playfair Display', serif;         /* body copy, paragraphs, forms */
+  --font-heading: 'Tinos', 'Playfair Display', serif;      /* h2, nav — simple, no cursive/script */
+  --font-display: 'Tinos', 'Playfair Display', serif;      /* site title, big headlines */
   --font-nav-alt: 'Freebooter', sans-serif;       /* top nav menu */
   --font-phone: 'Quicksand', sans-serif;          /* phone number callout */
   --font-button: 'Mate SC', sans-serif;           /* button labels */
