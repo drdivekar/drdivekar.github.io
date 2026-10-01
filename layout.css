@@ -527,7 +527,7 @@ main ul li {
   font-family: var(--font-button);
   font-size: 15px;
   text-decoration: none;
-  border-radius: 999 px;
+  border-radius: 999px;
   transition: background 0.15s ease;
 }
 
